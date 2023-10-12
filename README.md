@@ -94,3 +94,75 @@ class DetailScreen extends StatelessWidget {
   }
 }
 ```
+
+## Working with Paths
+lib/ui/book_detail_page.dart
+```dart
+@RoutePage<String>()
+class BookDetailScreen extends StatelessWidget {
+  final int bookId;
+
+  const BookDetailScreen({
+    super.key,
+    @PathParam('id') required this.bookId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Book Detail'),
+      ),
+      body: Center(
+        child: Text('Book ID: $bookId'),
+      ),
+    );
+  }
+}
+
+```
+
+lib/ui/book_list_page.dart
+```dart
+
+@RoutePage<String>()
+class BookListScreen extends StatelessWidget {
+  final List<String> books = [
+    'To Kill a Mockingbird',
+    '1984',
+    'The Great Gatsby',
+    'Pride and Prejudice',
+    'The Catcher in the Rye',
+    'Animal Farm',
+    'Brave New World',
+    'The Lord of the Rings',
+    'The Hobbit',
+    'The Chronicles of Narnia',
+  ];
+
+  BookListScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Book List'),
+      ),
+      body: ListView.builder(
+        itemCount: books.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            title: Text(books[index]),
+            onTap: () {
+              // navigate to detail page
+              AutoRouter.of(context).push(
+                BookDetailRoute(bookId: index),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+```
