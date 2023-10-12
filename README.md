@@ -202,3 +202,45 @@ class BookListScreen extends StatelessWidget {
   }
 }
 ```
+
+## Implement with get_it
+
+lib/service/service_locator.dart
+```dart
+import 'package:get_it/get_it.dart';
+
+import '../app/router/app_router.dart';
+
+GetIt getIt = GetIt.instance;
+
+Future<void> setupServiceLocator() async {
+  // services
+  getIt.registerSingleton<AppRouter>(AppRouter());
+}
+
+```
+
+lib/main.dart
+```dart
+
+void main() async {
+  /// setup service locator
+  await setupServiceLocator();
+
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
+  /// create an instance of `AppRouter`
+  // inal _appRouter = AppRouter();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      // hook up router to MaterialApp
+      routerConfig: getIt<AppRouter>().config(),
+    );
+  }
+```
