@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_route_guide/detail_page.dart';
 import 'package:auto_route_guide/home_page.dart';
 
 part 'app_router.gr.dart';
@@ -14,6 +15,8 @@ class AppRouter extends _$AppRouter {
           page: HomeRoute.page,
           initial: true,
         ),
-        AutoRoute(page: DetailRoute.page)
+        AutoRoute(
+          page: DetailRoute.page,
+        )
       ];
 }
