@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route_guide/detail_page.dart';
-import 'package:auto_route_guide/home_page.dart';
+import 'package:auto_route_guide/ui/screen/working_with_path/book_detail_screen.dart';
+import 'package:auto_route_guide/ui/screen/working_with_path/book_list_screen.dart';
+import 'package:auto_route_guide/ui/screen/navigation_between_screens/detail_screen.dart';
+import 'package:auto_route_guide/ui/screen/home_screen.dart';
+import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
@@ -17,6 +20,15 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(
           page: DetailRoute.page,
-        )
+        ),
+        AutoRoute(path: '/books', page: BookListRoute.page),
+        AutoRoute(
+          path: '/user/:userName',
+          page: UserRoute.page,
+        ),
+        AutoRoute(
+          path: '/books/:id',
+          page: BookDetailRoute.page,
+        ),
       ];
 }
